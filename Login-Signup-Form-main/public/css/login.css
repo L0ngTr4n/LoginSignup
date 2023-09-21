@@ -1,33 +1,43 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-body{
-    display: grid;
-    place-items: center;
+:root {
+    --primary-color: #007bff; /* Change this to your primary color */
 }
 
-h1{
-    /* color: rgb(223, 155, 52); */
-    margin-top: 20vh;
-    margin-bottom: 30px;
-
-}
-input{
-    font-size: 1rem;
-    width: 300px;
-    padding: 6px 2px; 
-    margin: 10px 0 10px 0;
-}
-.sub{
-    background-color:rgb(223, 155, 52);
-    cursor: pointer;
+body {
+    background-color: #f8f9fa;
 }
 
-form{
-    /* margin-top: 20vh; */
+.login-container {
+    margin-top: 100px;
+    max-width: 400px;
+}
+
+.login-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.login-heading {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
-    border: 5px solid rgb(111, 70, 23);
-    padding: 20px;
-    background-color: rgb(239, 192, 135);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darken the primary color on hover */
 }

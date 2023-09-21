@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const ejs = require ("ejs")
 const hbs = require("hbs");
 const LogInCollection = require("./mongo");
 const port = process.env.PORT || 3001;
@@ -12,7 +13,8 @@ const tempelatePath = path.join(__dirname, "../tempelates");
 const publicPath = path.join(__dirname, "../public");
 console.log(publicPath);
 
-app.set("view engine", "hbs");
+// app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 app.set("views", tempelatePath);
 app.use(express.static(publicPath));
 
@@ -43,11 +45,11 @@ app.post("/signup", async (req, res) => {
           role: role,
         });
         if (newUser.role == "customer") {
+          res.render("customer");
+        } else if (newUser.role == "vendor") {
           res.render("home");
-        // } else if (newUser.role == "vendor") {
-        //   res.render("vendor_register");
-        // } else {
-        //   res.render("shipper_register");
+        } else {
+          res.render("home");
         }
         newUser
           .save()
