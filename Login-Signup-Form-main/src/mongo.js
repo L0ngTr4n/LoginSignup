@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 const express = require('express');
 const app = express();
 
-mongoose.connect("mongodb+srv://L0ngTr4n:longtd2411@test.nemlrfl.mongodb.net/LoginSignup")
+mongoose.connect("mongodb+srv://hmyle:C6lrHMWYYDO2K5Bz@cluster0.sujlcna.mongodb.net/?retryWrites=true&w=majority")
 // mongoose.set('strictQuery', true)
 
 .then(()=>{
@@ -23,12 +23,12 @@ const logInSchema=new mongoose.Schema({
     }
 })
 
-const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
+const LogInCollection =  new mongoose.model('LogInCollection',logInSchema)
 
 // const LogInCollection = [
-//     { name: 'Alice', password: 1234 },
-//     { name: 'Bob', password: 1234 },
-//     { name: 'Charlie', password: 1234 }
+//     { name: 'Alice', password: "a1234" },
+//     { name: 'Bob', password: "a1234" },
+//     { name: 'Charlie', password: "a1234" }
 //   ];
   
 //   logInCollection.insertMany(LogInCollection)

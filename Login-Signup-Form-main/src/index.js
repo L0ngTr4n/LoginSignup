@@ -32,31 +32,26 @@ app.get('/home', (req, res) => {
 })
 
 app.post('/signup', async (req, res) => {
-    
-    // const data = new LogInCollection({
-    //     name: req.body.name,
-    //     password: req.body.password
-    // })
-    // await data.save()
 
-    const data = {
+    const newUser = new LogInCollection({
         name: req.body.name,
         password: req.body.password
-    }
+    })
 
-    const checking = await LogInCollection.findOne({ name: req.body.name })
-
-   try{
-    if (checking.name === req.body.name && checking.password===req.body.password) {
-        res.send("user details already exists")
-    }
-    else{
-        await LogInCollection.insertMany([data])
-    }
-   }
-   catch{
-    res.send("wrong inputs")
-   }
+    console.log(req.body.name, req.body.password);
+    
+    LogInCollection.exists({name: req.body.name})
+    .then((result) => {
+        if (result === null) {
+            newUser.save()
+            .then(() => console.log("Inserted user with ", req.body.username, req.body.password))
+            .catch((error) => console.log(error));
+            
+        } else {
+            console.log("user already exists!");
+            res.render("user details already exists");
+        }
+    })
 
     res.status(201).render("home", {
         naming: req.body.name
@@ -68,7 +63,7 @@ app.post('/login', async (req, res) => {
 
     try {
         const check = await LogInCollection.findOne({ name: req.body.name })
-
+        console.log(req.body.name, req.body.password);
         if (check.password === req.body.password) {
             res.status(201).render("home", { naming: `${req.body.password}+${req.body.name}` })
         }
@@ -76,8 +71,6 @@ app.post('/login', async (req, res) => {
         else {
             res.send("incorrect password")
         }
-
-
     } 
     
     catch (e) {
