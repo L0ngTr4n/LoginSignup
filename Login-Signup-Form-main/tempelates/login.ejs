@@ -12,14 +12,14 @@
     <div class="container login-container">
         <div class="card login-card">
             <h2 class="login-heading">Login</h2>
-            <form>
+            <form action="/" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="text-center mt-3">
-            <p>Don't have an account? <a href="C:\Users\nguye\OneDrive\Documents\GitHub\Full-stack_Web_Application\UserRegistration\UserRegistration.html">Register</a></p>
+            <p>Don't have an account? <a href="signup">Register</a></p>
         </div>
     </div>
 

@@ -1,10 +1,11 @@
+// const bodyParser = require("body-parser")
 const express = require("express");
 const path = require("path");
 const app = express();
 const ejs = require ("ejs")
 const hbs = require("hbs");
 const LogInCollection = require("./mongo");
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
@@ -13,10 +14,14 @@ const tempelatePath = path.join(__dirname, "../tempelates");
 const publicPath = path.join(__dirname, "../public");
 console.log(publicPath);
 
+//SET
+
 // app.set("view engine", "hbs");
 app.set("view engine", "ejs");
 app.set("views", tempelatePath);
 app.use(express.static(publicPath));
+
+//GET
 
 app.get("/signup", (req, res) => {
   res.render("signup");
@@ -29,6 +34,9 @@ app.get("/", (req, res) => {
 app.get("/home", (req, res) => {
   res.render("home");
 });
+
+
+//POST
 
 app.post("/signup", async (req, res) => {
   const { username, email, password, confirm_password, role } = req.body;
@@ -65,22 +73,28 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  try {
-    const check = await LogInCollection.findOne({ name: req.body.name });
-    console.log(req.body.name, req.body.password);
-    if (check.password === req.body.password) {
-      res
-        .status(201)
-        .render("home", { naming: `${req.body.password}+${req.body.name}` });
-    } else {
-      res.send("incorrect password");
-    }
-  } catch (e) {
-    res.send("wrong details");
-  }
+
+app.post("/", async (req, res) => {
+  const { username, password } = req.body;
+
+  // Check if a user with the given username and password exists
+  LogInCollection.findOne({ name: username, password: password}).then((success) => {
+      if (success) {
+          // User with matching username and password exists
+          // Implement session management or JWT for authentication here
+
+          // For this example, let's just send a success message
+          // res.send("Login successful!");
+          res.render("home")
+      } else {
+          // No matching user found; authentication failed
+          res.render("login", { error: "Invalid username or password" });
+      }
+  });
 });
 
+
+//PORT CONNECT
 app.listen(port, () => {
   console.log("port connected");
 });
